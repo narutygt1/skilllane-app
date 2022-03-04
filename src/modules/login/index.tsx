@@ -1,7 +1,11 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-    return (
-        <h1>Login</h1>
-    );
+  return (
+    <>
+      <h1>Login</h1>
+      <Link to="/">Home</Link>
+    </>
+  );
 }
