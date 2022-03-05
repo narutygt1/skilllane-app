@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import AppLayout from "./core/AppLayout";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const theme = createTheme({
 	palette: {
@@ -18,14 +20,16 @@ const theme = createTheme({
 
 ReactDOM.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<AppLayout>
-					<App />
-					<CssBaseline />
-				</AppLayout>
-			</ThemeProvider>
-		</BrowserRouter>
+		<Provider store={store}>
+			<BrowserRouter>
+				<ThemeProvider theme={theme}>
+					<AppLayout>
+						<App />
+						<CssBaseline />
+					</AppLayout>
+				</ThemeProvider>
+			</BrowserRouter>
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

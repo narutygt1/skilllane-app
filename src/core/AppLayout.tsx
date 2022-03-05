@@ -10,12 +10,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Hidden from "@mui/material/Hidden";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBox from "../components/SearchBox";
+import ProfileMenu from "../components/ProfileMenu";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 interface AppLayoutProps {
 	children: ReactNode;
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
+	const myUser = useSelector((state: RootState) => state.myUser);
 	let navigate = useNavigate();
 
 	return (
@@ -40,18 +44,23 @@ export default function AppLayout({ children }: AppLayoutProps) {
 							<Box ml="auto" my="auto">
 								<Box>
 									<Stack direction="row" spacing={1} flexWrap="wrap">
-										<Button
-											variant="outlined"
-											style={{ color: "#00532a", borderColor: "#00532a" }}
-											onClick={() => navigate(`/login`)}>
-											<Typography component="span">เข้าสู่ระบบ</Typography>
-										</Button>
-										<Button
-											variant="contained"
-											style={{ backgroundColor: "#00532a" }}
-											onClick={() => navigate(`/register`)}>
-											<Typography component="span">สมัครสมาชิก</Typography>
-										</Button>
+										{!myUser && (
+											<Button
+												variant="outlined"
+												style={{ color: "#00532a", borderColor: "#00532a" }}
+												onClick={() => navigate(`/login`)}>
+												<Typography component="span">เข้าสู่ระบบ</Typography>
+											</Button>
+										)}
+										{!myUser && (
+											<Button
+												variant="contained"
+												style={{ backgroundColor: "#00532a" }}
+												onClick={() => navigate(`/register`)}>
+												<Typography component="span">สมัครสมาชิก</Typography>
+											</Button>
+										)}
+										<ProfileMenu />
 									</Stack>
 								</Box>
 							</Box>

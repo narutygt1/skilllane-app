@@ -70,6 +70,7 @@ export default function Register() {
 									const dataResult = await response.json();
 									if (response.status === 200) {
 										setMsgAlert(<MessageAlert message={dataResult.message} severity="success" />);
+										actions.resetForm();
 									} else {
 										setMsgAlert(<MessageAlert message={dataResult.message} severity="error" />);
 									}
@@ -103,7 +104,13 @@ export default function Register() {
 												<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
 													รหัสผ่าน
 												</Typography>
-												<MyTextField name="password" variant="outlined" fullWidth size="small" />
+												<MyTextField
+													name="password"
+													type="password"
+													variant="outlined"
+													fullWidth
+													size="small"
+												/>
 											</Stack>
 										</Grid>
 										<Grid item xs={12}>
@@ -111,7 +118,13 @@ export default function Register() {
 												<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
 													ยืนยันรหัสผ่าน
 												</Typography>
-												<MyTextField name="passwordConfirm" variant="outlined" fullWidth size="small" />
+												<MyTextField
+													name="passwordConfirm"
+													type="password"
+													variant="outlined"
+													fullWidth
+													size="small"
+												/>
 											</Stack>
 										</Grid>
 										<Grid item xs={12} sm={6}>
@@ -161,6 +174,7 @@ export default function Register() {
 													วันเกิด
 												</Typography>
 												<BirthDatePicker
+													key={JSON.stringify(values.birthday)}
 													value={values.birthday}
 													onChange={(v) => setFieldValue("birthday", v)}
 												/>
