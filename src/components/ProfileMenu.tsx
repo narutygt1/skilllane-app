@@ -53,7 +53,8 @@ export default function ProfileMenu() {
 				MenuListProps={{
 					"aria-labelledby": "basic-button",
 				}}>
-				<MenuItem onClick={() => navigate("/profile")}>My account</MenuItem>
+				<MenuItem onClick={() => navigate("/profile")}>My Account</MenuItem>
+				{myUser.role === "instructor" && <MenuItem onClick={() => navigate("/course")}>Course</MenuItem>}
 				<MenuItem onClick={signOut}>Logout</MenuItem>
 			</Menu>
 		</Box>

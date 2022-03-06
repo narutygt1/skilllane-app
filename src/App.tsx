@@ -4,6 +4,7 @@ import Home from "./modules/home";
 import Login from "./modules/login";
 import Register from "./modules/register";
 import Profile from "./modules/profile";
+import Course from "./modules/course";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
@@ -29,6 +30,7 @@ function App() {
 				<Route element={<ProtectedRoutes />}>
 					<Route path="home" element={<Home />} />
 					<Route path="profile" element={<Profile />} />
+					<Route path="course" element={<Course />} />
 				</Route>
 			</Routes>
 		</div>

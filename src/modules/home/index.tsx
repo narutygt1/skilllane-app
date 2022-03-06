@@ -4,13 +4,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
 export default function Home() {
-	const myUser = useSelector((state: RootState) => state.myUser);
-	let navigate = useNavigate();
-
-	if (!myUser) {
-		navigate("/login", { replace: true });
-	}
-
 	return (
 		<>
 			<main>
