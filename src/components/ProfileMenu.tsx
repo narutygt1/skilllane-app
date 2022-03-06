@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,6 +11,7 @@ import { setMyUser } from "../redux/slices/User";
 import { setAuthToken } from "../lib/auth";
 
 export default function ProfileMenu() {
+	let navigate = useNavigate();
 	const dispatch = useDispatch();
 	const myUser = useSelector((state: RootState) => state.myUser);
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -26,7 +28,7 @@ export default function ProfileMenu() {
 	const signOut = () => {
 		dispatch(setMyUser(null));
 		setAuthToken("");
-        handleClose();
+		handleClose();
 	};
 
 	if (!myUser) return null;
@@ -51,7 +53,7 @@ export default function ProfileMenu() {
 				MenuListProps={{
 					"aria-labelledby": "basic-button",
 				}}>
-				<MenuItem onClick={handleClose}>My account</MenuItem>
+				<MenuItem onClick={() => navigate("/profile")}>My account</MenuItem>
 				<MenuItem onClick={signOut}>Logout</MenuItem>
 			</Menu>
 		</Box>

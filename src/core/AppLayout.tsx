@@ -37,9 +37,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
 								<img src="https://resource.skilllane.com/images/Logo/logo.png" alt="skilllane-test" />
 							</Link>
 						</Box>
-						<Box ml={2}>
-							<SearchBox onChange={(v) => console.log(v)} />
-						</Box>
+						{myUser && (
+							<Box ml={2}>
+								<SearchBox onChange={(v) => console.log(v)} />
+							</Box>
+						)}
 						<Hidden smDown>
 							<Box ml="auto" my="auto">
 								<Box>
