@@ -14,36 +14,29 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 interface FormEditProps {
-	value?: IUser;
+	value: IUser;
 }
 
 export default function FormEdit({ value }: FormEditProps) {
 	const [msgAlert, setMsgAlert] = useState<JSX.Element | null>(null);
+	console.log(value);
 
 	return (
 		<>
 			{msgAlert}
-			<Box mx="auto" maxWidth={380}>
+			<Box mt={4} mx="auto" maxWidth={380}>
 				<Formik
 					initialValues={{
-						username: "",
-						password: "",
-						passwordConfirm: "",
-						role: "student",
-						firstname: "",
-						lastname: "",
-						nickname: "",
-						gender: "male",
-						birthday: null,
+						username: value.username,
+						firstname: value.firstname,
+						lastname: value.lastname,
+						nickname: value.nickname,
+						gender: value.gender,
+						role: value.role.name,
+						birthday: value.birthday,
 					}}
 					validationSchema={Yup.object({
 						username: Yup.string().required("กรุณากรอกอีเมล"),
-						password: Yup.string().required("กรุณากรอกรหัสผ่าน"),
-						passwordConfirm: Yup.string()
-							.required("กรุณากรอกรหัสผ่าน")
-							.test("passwordMatch", "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่อีกครั้ง", function (passwordConfirm) {
-								return this.parent.password === passwordConfirm;
-							}),
 						firstname: Yup.string().required("กรุณากรอกชื่อจริง"),
 						lastname: Yup.string().required("กรุณากรอกนามสกุล"),
 						nickname: Yup.string().required("กรุณากรอกชื่อเล่น"),
@@ -54,9 +47,10 @@ export default function FormEdit({ value }: FormEditProps) {
 					onSubmit={(values, actions) => {
 						new Promise((resolve: any) => {
 							setTimeout(async () => {
-								const response = await fetch(process.env.REACT_APP_SERVICE_API + "/api/user/add_item", {
+								const response = await fetch(process.env.REACT_APP_SERVICE_API + "/api/user/update_item", {
 									method: "POST",
 									body: JSON.stringify({
+										id: value._id,
 										...values,
 									}),
 									headers: {
@@ -67,7 +61,6 @@ export default function FormEdit({ value }: FormEditProps) {
 								const dataResult = await response.json();
 								if (response.status === 200) {
 									setMsgAlert(<MessageAlert message={dataResult.message} severity="success" />);
-									actions.resetForm();
 								} else {
 									setMsgAlert(<MessageAlert message={dataResult.message} severity="error" />);
 								}
@@ -79,7 +72,6 @@ export default function FormEdit({ value }: FormEditProps) {
 					}}>
 					{({ isSubmitting, values, errors, setFieldValue }) => (
 						<Form>
-							{console.log(isSubmitting)}
 							<Box sx={{ flexGrow: 1 }}>
 								<Grid container spacing={2}>
 									<Grid item xs={12}>
@@ -93,34 +85,7 @@ export default function FormEdit({ value }: FormEditProps) {
 												placeholder="example@domain.com"
 												fullWidth
 												size="small"
-											/>
-										</Stack>
-									</Grid>
-									<Grid item xs={12}>
-										<Stack>
-											<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
-												รหัสผ่าน
-											</Typography>
-											<MyTextField
-												name="password"
-												type="password"
-												variant="outlined"
-												fullWidth
-												size="small"
-											/>
-										</Stack>
-									</Grid>
-									<Grid item xs={12}>
-										<Stack>
-											<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
-												ยืนยันรหัสผ่าน
-											</Typography>
-											<MyTextField
-												name="passwordConfirm"
-												type="password"
-												variant="outlined"
-												fullWidth
-												size="small"
+												disabled
 											/>
 										</Stack>
 									</Grid>
@@ -129,7 +94,7 @@ export default function FormEdit({ value }: FormEditProps) {
 											<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
 												ประเภท
 											</Typography>
-											<RoleDrop name="role" />
+											<RoleDrop name="role" disabled />
 										</Stack>
 									</Grid>
 									<Grid item xs={12} sm={6}></Grid>
@@ -186,7 +151,7 @@ export default function FormEdit({ value }: FormEditProps) {
 												style={{ backgroundColor: "#00532a" }}
 												fullWidth
 												size="large">
-												เข้าสู่ระบบ
+												บันทึก
 											</Button>
 										</Box>
 									</Grid>
