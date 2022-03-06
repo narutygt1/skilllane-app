@@ -1,10 +1,5 @@
-import Box from "@mui/material/Box";
-import UserLayout from "../../core/UserLayout";
+import CourseList from "../course/CourseList";
 
-export default function Profile() {
-	return (
-		<UserLayout>
-			<Box>Course</Box>
-		</UserLayout>
-	);
+export default function Course() {
+	return <CourseList />;
 }

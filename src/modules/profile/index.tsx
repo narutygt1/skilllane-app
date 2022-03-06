@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import UserLayout from "../../core/UserLayout";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import FormEdit from "./FormEdit";
-import AdminTitle from "../../components/AdminTitle";
+import AdminBox from "../../components/AdminBox";
 import NotFound from "../../components/NotFound";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useSelector } from "react-redux";
@@ -30,13 +28,15 @@ export default function Profile() {
 
 	return (
 		<UserLayout>
-			<Box py={2}>
-				<AdminTitle label="Profile" />
-			</Box>
-			<Divider />
-			<Box pb={6}>
-				{isLoading ? <CircularProgress /> : user ? <FormEdit value={user} /> : <NotFound />}
-			</Box>
+			<AdminBox title="โปรไฟล์">
+				{isLoading ? (
+					<CircularProgress sx={{ marginTop: 4 }} />
+				) : user ? (
+					<FormEdit value={user} />
+				) : (
+					<NotFound />
+				)}
+			</AdminBox>
 		</UserLayout>
 	);
 }
