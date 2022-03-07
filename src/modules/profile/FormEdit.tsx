@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import MyTextField from "../../components/MyTextField";
 import GenderDrop from "../../components/GenderDrop";
 import RoleDrop from "../../components/RoleDrop";
-import BirthDatePicker from "../../components/BirthDatePicker";
+import MyDatePicker from "../../components/MyDatePicker";
 import MessageAlert from "../../components/MessageAlert";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -19,7 +19,6 @@ interface FormEditProps {
 
 export default function FormEdit({ value }: FormEditProps) {
 	const [msgAlert, setMsgAlert] = useState<JSX.Element | null>(null);
-	console.log(value);
 
 	return (
 		<>
@@ -135,7 +134,7 @@ export default function FormEdit({ value }: FormEditProps) {
 											<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
 												วันเกิด
 											</Typography>
-											<BirthDatePicker
+											<MyDatePicker
 												key={JSON.stringify(values.birthday)}
 												value={values.birthday}
 												onChange={(v) => setFieldValue("birthday", v)}

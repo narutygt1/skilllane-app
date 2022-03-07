@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminBox from "../../components/AdminBox";
 import UserLayout from "../../core/UserLayout";
@@ -5,9 +6,23 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FormEdit from "./FormEdit";
+import { ICategory } from "../../types/Category";
 
 export default function CreateCourse() {
 	let navigate = useNavigate();
+	const [cats, setCategories] = useState<ICategory[]>([]);
+
+	useEffect(() => {
+		async function FetchData() {
+			const resData = await fetch(process.env.REACT_APP_SERVICE_API + "/api/category").then((res) =>
+				res.json()
+			);
+
+			resData?.data && setCategories(resData?.data);
+		}
+
+		FetchData();
+	}, []);
 
 	return (
 		<UserLayout>
@@ -19,7 +34,7 @@ export default function CreateCourse() {
 							กลับ
 						</Button>
 					}>
-					<FormEdit type="create" />
+					<FormEdit type="create" categories={cats} />
 				</AdminBox>
 			</Box>
 		</UserLayout>

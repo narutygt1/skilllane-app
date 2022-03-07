@@ -5,13 +5,13 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import TextField from "@mui/material/TextField";
 
-interface BirthDatePickerProps {
+interface MyDatePickerProps {
 	value?: Date | null;
 	label?: string;
 	onChange?: (value: Date | null) => void;
 }
 
-export default function BirthDatePicker({ value, label, onChange }: BirthDatePickerProps) {
+export default function MyDatePicker({ value, label, onChange }: MyDatePickerProps) {
 	const [localValue, setLocalValue] = React.useState<Date | null>(value || null);
 
 	React.useEffect(() => {

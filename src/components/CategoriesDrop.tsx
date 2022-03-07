@@ -5,19 +5,19 @@ import Select, { SelectProps } from "@mui/material/Select";
 import { useField } from "formik";
 import FormHelperText from "@mui/material/FormHelperText";
 import Typography from "@mui/material/Typography";
-import { IGender } from "../types/Gender";
+import { ICategory } from "../types/Category";
 
-export default function GenderDrop(props: SelectProps) {
-	const { label } = props;
-	const [field, meta] = useField(props.name || "");
+export default function CategoriesDrop(props: SelectProps & { items: ICategory[] }) {
+	const { items, ...rest } = props;
+	const [field, meta] = useField(rest.name || "");
 	const errorText = meta.error && meta.touched ? meta.error : "";
-	const uxId = "gender-drop";
+	const uxId = "categories-drop";
 
 	return (
 		<FormControl fullWidth error={errorText ? true : false}>
-			<InputLabel id={uxId}>{label}</InputLabel>
-			<Select size="small" labelId={uxId} label={label} {...field} {...props}>
-				{initData.map((itm) => (
+			<InputLabel id={uxId}>{rest.label}</InputLabel>
+			<Select size="small" labelId={uxId} label={rest.label} {...field} {...rest}>
+				{items.map((itm) => (
 					<MenuItem value={itm.name} key={itm.name}>
 						<Typography component="span">{itm.display}</Typography>
 					</MenuItem>
@@ -28,8 +28,3 @@ export default function GenderDrop(props: SelectProps) {
 		</FormControl>
 	);
 }
-
-const initData: IGender[] = [
-	{ name: "male", display: "ชาย" },
-	{ name: "female", display: "หญิง" },
-];

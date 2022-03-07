@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import MyTextField from "../../components/MyTextField";
 import GenderDrop from "../../components/GenderDrop";
 import RoleDrop from "../../components/RoleDrop";
-import BirthDatePicker from "../../components/BirthDatePicker";
+import MyDatePicker from "../../components/MyDatePicker";
 import MessageAlert from "../../components/MessageAlert";
 
 export default function Register() {
@@ -82,7 +82,6 @@ export default function Register() {
 						}}>
 						{({ isSubmitting, values, errors, setFieldValue }) => (
 							<Form>
-								{console.log(isSubmitting)}
 								<Box sx={{ flexGrow: 1 }}>
 									<Grid container spacing={2}>
 										<Grid item xs={12}>
@@ -173,7 +172,7 @@ export default function Register() {
 												<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
 													วันเกิด
 												</Typography>
-												<BirthDatePicker
+												<MyDatePicker
 													key={JSON.stringify(values.birthday)}
 													value={values.birthday}
 													onChange={(v) => setFieldValue("birthday", v)}

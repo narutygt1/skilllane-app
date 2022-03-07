@@ -31,6 +31,16 @@ export default function ProfileMenu() {
 		handleClose();
 	};
 
+	const goToProfile = () => {
+		navigate("/profile");
+		handleClose();
+	};
+
+	const goToCourse = () => {
+		navigate("/course");
+		handleClose();
+	};
+
 	if (!myUser) return null;
 
 	return (
@@ -53,8 +63,8 @@ export default function ProfileMenu() {
 				MenuListProps={{
 					"aria-labelledby": "basic-button",
 				}}>
-				<MenuItem onClick={() => navigate("/profile")}>My Account</MenuItem>
-				{myUser.role === "instructor" && <MenuItem onClick={() => navigate("/course")}>Course</MenuItem>}
+				<MenuItem onClick={goToProfile}>My Account</MenuItem>
+				{myUser.role === "instructor" && <MenuItem onClick={goToCourse}>Course</MenuItem>}
 				<MenuItem onClick={signOut}>Logout</MenuItem>
 			</Menu>
 		</Box>
