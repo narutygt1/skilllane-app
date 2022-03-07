@@ -7,9 +7,12 @@ import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FormEdit from "./FormEdit";
 import { ICategory } from "../../types/Category";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 export default function CreateCourse() {
 	let navigate = useNavigate();
+	const myUser = useSelector((state: RootState) => state.myUser);
 	const [cats, setCategories] = useState<ICategory[]>([]);
 
 	useEffect(() => {
@@ -34,7 +37,7 @@ export default function CreateCourse() {
 							กลับ
 						</Button>
 					}>
-					<FormEdit type="create" categories={cats} />
+					<FormEdit type="create" categories={cats} userId={myUser?.id || ""} />
 				</AdminBox>
 			</Box>
 		</UserLayout>

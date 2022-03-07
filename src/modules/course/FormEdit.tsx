@@ -14,33 +14,32 @@ import MessageAlert from "../../components/MessageAlert";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-interface CustomICourse extends Omit<ICourse, "instructor" | "start_time" | "end_time"> {
-	instructor?: string[];
+interface CustomICourse extends Omit<ICourse, "price" | "instructor" | "start_time" | "end_time"> {
+	price?: any;
+	instructor: string;
 	start_time: Date | null;
 	end_time: Date | null;
 }
 
 interface FormEditProps {
-	value?: any;
+	value?: ICourse;
 	categories: ICategory[];
 	type: "create" | "edit";
+	userId: string;
 }
 
-export default function FormEdit({ value, type, categories }: FormEditProps) {
+export default function FormEdit({ value, type, categories, userId }: FormEditProps) {
 	const [msgAlert, setMsgAlert] = useState<JSX.Element | null>(null);
 	const initValue: CustomICourse = {
-		name: "",
-		description: "",
-		category: "mandatory",
-		price: {
-			price: 0,
-			credit_price: 0,
-		},
-		image: "",
-		subject: "",
-		start_time: null,
-		end_time: null,
-		number_of_student: 0,
+		name: value?.name || "",
+		description: value?.description || "",
+		category: (value?.category as any)?.name || "mandatory",
+		subject: value?.subject || "",
+		image: value?.image || "",
+		start_time: value?.start_time ? new Date(value?.start_time) : null,
+		end_time: value?.end_time ? new Date(value?.end_time) : null,
+		number_of_student: value?.number_of_student || 1,
+		instructor: userId,
 	};
 
 	return (
@@ -56,7 +55,11 @@ export default function FormEdit({ value, type, categories }: FormEditProps) {
 						subject: Yup.string().required("กรุณากรอกวิชา"),
 						start_time: Yup.string().required("กรุณาเลือกเวลา"),
 						end_time: Yup.string().required("กรุณาเลือกเวลา"),
-						number_of_student: Yup.string().required("กรุณาระบุจำนวน"),
+						number_of_student: Yup.number()
+							.required("กรุณาระบุจำนวน")
+							.typeError("กรุณาระบบจำนวนให้ถูกค้อง")
+							.min(0, "จำนวนต้องมากกว่าเท่ากับ 1")
+							.max(100, "จำนวนต้องมน้อยกว่าเท่ากับ 100"),
 					})}
 					onSubmit={(values, actions) => {
 						if (type === "create") {
@@ -65,8 +68,7 @@ export default function FormEdit({ value, type, categories }: FormEditProps) {
 									const response = await fetch(process.env.REACT_APP_SERVICE_API + "/api/course/add_item", {
 										method: "POST",
 										body: JSON.stringify({
-											// id: value._id,
-											// ...values,
+											...values,
 										}),
 										headers: {
 											"Content-Type": "application/json",
@@ -93,8 +95,8 @@ export default function FormEdit({ value, type, categories }: FormEditProps) {
 										{
 											method: "POST",
 											body: JSON.stringify({
-												// id: value._id,
-												// ...values,
+												id: (value as any)?._id,
+												...values,
 											}),
 											headers: {
 												"Content-Type": "application/json",
@@ -187,6 +189,7 @@ export default function FormEdit({ value, type, categories }: FormEditProps) {
 												name="number_of_student"
 												variant="outlined"
 												type="number"
+												InputProps={{ inputProps: { min: 1, max: 100 } }}
 												fullWidth
 												size="small"
 											/>
