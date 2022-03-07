@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import MyTextField from "../../components/MyTextField";
-import GenderDrop from "../../components/GenderDrop";
+import MyDropzone from "../../components/MyDropzone";
 import CategoriesDrop from "../../components/CategoriesDrop";
 import MyDateTimePicker from "../../components/MyDateTimePicker";
 import MessageAlert from "../../components/MessageAlert";
@@ -131,6 +131,14 @@ export default function FormEdit({ value, type, categories }: FormEditProps) {
 												fullWidth
 												size="small"
 											/>
+										</Stack>
+									</Grid>
+									<Grid item xs={12}>
+										<Stack>
+											<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
+												รูปหน้าปก
+											</Typography>
+											<MyDropzone name="image" />
 										</Stack>
 									</Grid>
 									<Grid item xs={12}>
