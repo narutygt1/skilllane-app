@@ -16,7 +16,7 @@ export default function CourseList({ items, xs = 12, md = 6, lg = 3, xl = 2.4 }:
 		<Box sx={{ flexGrow: 1 }} py={4} px={1}>
 			<Grid container spacing={2} columnSpacing={1}>
 				{Array.from(Array(30), (e, i) => (
-					<Grid item xs={xs} md={md} lg={lg} xl={xl}>
+					<Grid item xs={xs} md={md} lg={lg} xl={xl} key={i}>
 						<CourseCard />
 					</Grid>
 				))}

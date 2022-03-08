@@ -87,7 +87,7 @@ export default function Register() {
 										<Grid item xs={12}>
 											<Stack>
 												<Typography variant="subtitle1" fontSize={18} color="#00532a" textAlign="left">
-													อีเมล
+													ชื่อบัญชีผู้ใช้
 												</Typography>
 												<MyTextField
 													name="username"

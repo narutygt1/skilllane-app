@@ -47,7 +47,11 @@ export default function CourseEdit() {
 				<AdminBox
 					title="แก้ไขคอร์ส"
 					startComponent={
-						<Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => navigate("/course")}>
+						<Button
+							variant="outlined"
+							startIcon={<ArrowBackIcon />}
+							sx={{ color: "#00532a", borderColor: "#00532a !important" }}
+							onClick={() => navigate("/course")}>
 							กลับ
 						</Button>
 					}>

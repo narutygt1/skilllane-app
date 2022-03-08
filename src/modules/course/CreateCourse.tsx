@@ -33,7 +33,11 @@ export default function CreateCourse() {
 				<AdminBox
 					title="สร้างคอร์สใหม่"
 					startComponent={
-						<Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => navigate("/course")}>
+						<Button
+							variant="outlined"
+							startIcon={<ArrowBackIcon />}
+							sx={{ color: "#00532a", borderColor: "#00532a !important" }}
+							onClick={() => navigate("/course")}>
 							กลับ
 						</Button>
 					}>

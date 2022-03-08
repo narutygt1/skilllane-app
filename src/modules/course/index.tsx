@@ -18,6 +18,7 @@ export default function Course() {
 						<Button
 							variant="contained"
 							startIcon={<AddCircleIcon />}
+							sx={{ backgroundColor: "#00532a !important" }}
 							onClick={() => navigate("/course/create")}>
 							สร้าง
 						</Button>
