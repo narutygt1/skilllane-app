@@ -9,7 +9,7 @@ import { RootState } from "../../redux/store";
 import { IUser } from "../../types/User";
 
 export default function Profile() {
-	const myUser = useSelector((state: RootState) => state.myUser);
+	const myUser = useSelector((state: RootState) => state.user.myUser);
 	const [user, setUser] = useState<IUser | null>(null);
 	const [isLoading, setLoading] = useState<boolean>(true);
 

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 const useAuth = () => {
-	const myUser = useSelector((state: RootState) => state.myUser);
+	const myUser = useSelector((state: RootState) => state.user.myUser);
 	return !!myUser;
 };
 

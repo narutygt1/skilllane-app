@@ -3,7 +3,7 @@ import { IUserAuth } from "../../types/User";
 
 const initialLocalStorage = () => {
 	const localData = typeof window !== "undefined" ? localStorage.getItem("skilllane-user") : null;
-	return localData ? JSON.parse(localData) : null;
+	return localData ? (localData !== "undefined" ? JSON.parse(localData) : null) : null;
 };
 
 const initialState: { myUser: IUserAuth | null } = {

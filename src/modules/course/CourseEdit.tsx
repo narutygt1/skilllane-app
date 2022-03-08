@@ -16,7 +16,7 @@ import { RootState } from "../../redux/store";
 export default function CourseEdit() {
 	let navigate = useNavigate();
 	let { courseId } = useParams();
-	const myUser = useSelector((state: RootState) => state.myUser);
+	const myUser = useSelector((state: RootState) => state.user.myUser);
 	const [course, setCourse] = useState<ICourse | null>(null);
 	const [cats, setCategories] = useState<ICategory[]>([]);
 	const [isLoading, setLoading] = useState<boolean>(true);

@@ -19,7 +19,7 @@ interface AppLayoutProps {
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
-	const myUser = useSelector((state: RootState) => state.myUser);
+	const myUser = useSelector((state: RootState) => state.user.myUser);
 	let navigate = useNavigate();
 
 	return (

@@ -12,7 +12,7 @@ import { RootState } from "../../redux/store";
 
 export default function CreateCourse() {
 	let navigate = useNavigate();
-	const myUser = useSelector((state: RootState) => state.myUser);
+	const myUser = useSelector((state: RootState) => state.user.myUser);
 	const [cats, setCategories] = useState<ICategory[]>([]);
 
 	useEffect(() => {

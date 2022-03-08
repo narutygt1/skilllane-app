@@ -14,7 +14,7 @@ import ProtectedLoggedInRoutes from "./core/ProtectedLoggedInRoutes";
 import ProtectedRoutes from "./core/ProtectedRoutes";
 
 function App() {
-	const myUser = useSelector((state: RootState) => state.myUser);
+	const myUser = useSelector((state: RootState) => state.user.myUser);
 
 	useEffect(() => {
 		localStorage.setItem("skilllane-user", JSON.stringify(myUser));
