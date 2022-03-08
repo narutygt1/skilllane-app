@@ -6,9 +6,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 interface SearchBoxProps {
 	onChange?: (value: string) => void;
+	fullWidth?: boolean;
 }
 
-export default function SearchBox({ onChange }: SearchBoxProps) {
+export default function SearchBox({ onChange, fullWidth = false }: SearchBoxProps) {
 	const [localValue, setLocalValue] = useState<string>("");
 	const debouncedValue = useDebounce(localValue, 500);
 
@@ -28,6 +29,7 @@ export default function SearchBox({ onChange }: SearchBoxProps) {
 					</InputAdornment>
 				),
 			}}
+			fullWidth={fullWidth}
 			variant="outlined"
 			onChange={(e) => setLocalValue(e.target.value)}
 		/>
