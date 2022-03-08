@@ -10,6 +10,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 export default function Home() {
+
 	return (
 		<Box>
 			<CardMedia
@@ -17,15 +18,15 @@ export default function Home() {
 				image="https://skilllane.s3-ap-southeast-1.amazonaws.com/tu/datascience/data_science_banner.jpg"
 				alt="skilllane test"
 			/>
-			<Box mx="auto" maxWidth={1140}>
+			<Box mx="auto" maxWidth={1140} px={1}>
 				<Box position="relative" top={-28} mx="auto" maxWidth={980} mb={6}>
 					<SearchCombo />
 				</Box>
 				<Box>
-					<Typography variant="h1" component="div" fontSize={{ xs: 30, md: 36 }} color="#4e4e4e" mb={3}>
+					<Typography variant="h1" component="div" fontSize={{ xs: 28, md: 36 }} color="#4e4e4e" mb={3}>
 						วิชาในหลักสูตร
 					</Typography>
-					<CategoryTabs />
+					<CategoryTabs onChange={(v) => console.log(v)} />
 				</Box>
 				<Box>
 					<CourseList items={[]} />
