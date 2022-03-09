@@ -118,7 +118,7 @@ export default function CourseDetails() {
 						</Box>
 
 						<Box mb={2}>
-							<Typography variant="h2" fontSize={{ xs: 20, sm: 30 }} color="#676767" textAlign="left">
+							<Typography variant="h2" fontSize={{ xs: 16, sm: 30 }} color="#676767" textAlign="left">
 								{course.name}
 							</Typography>
 						</Box>
@@ -129,6 +129,7 @@ export default function CourseDetails() {
 								sx={{
 									border: "1px solid #555",
 									color: "#555",
+									fontSize: { xs: 10, sm: 12 },
 									"&:hover": {
 										color: "#fff",
 										backgroundColor: "#00532a",
