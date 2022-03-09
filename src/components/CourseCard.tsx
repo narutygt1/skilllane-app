@@ -22,8 +22,10 @@ import { IUser } from "../types/User";
 const CustomCardActionArea = styled(CardActionArea)(({ theme }) => ({
 	display: "flex",
 	flexDirection: "column",
+	height: "100%",
 	"& .MuiCardContent-root": {
 		padding: 10,
+		height: "100%",
 	},
 	[theme.breakpoints.down("md")]: {
 		flexDirection: "row",
@@ -72,8 +74,7 @@ interface CourseCardProps {
 }
 
 export default function CourseCard({ value, onClick }: CourseCardProps) {
-
-	const instructor: IUser | null =  value.instructor.length > 0 ? value.instructor[0] as any : null;
+	const instructor: IUser | null = value.instructor.length > 0 ? (value.instructor[0] as any) : null;
 	const instName = instructor ? `${instructor.firstname} ${instructor.lastname}` : "";
 
 	return (
@@ -87,7 +88,7 @@ export default function CourseCard({ value, onClick }: CourseCardProps) {
 							gutterBottom
 							variant="h2"
 							component="div"
-							fontSize={{ xs: 12 ,sm: 14}}
+							fontSize={{ xs: 12, sm: 14 }}
 							overflow="hidden"
 							color="#00532a"
 							textAlign="left">
@@ -142,6 +143,18 @@ export default function CourseCard({ value, onClick }: CourseCardProps) {
 							</Typography>
 						</Stack>
 					</PriceBox>
+					<Hidden mdDown>
+						<Box mt={3}>
+							<Stack spacing={0} alignItems="center">
+								<Typography variant="body2" fontSize={10}>
+									เริ่ม: {new Date(value.start_time).toLocaleString()}
+								</Typography>
+								<Typography variant="body2" fontSize={10}>
+									สิ้นสุด: {new Date(value.end_time).toLocaleString()}
+								</Typography>
+							</Stack>
+						</Box>
+					</Hidden>
 				</CardContent>
 			</CustomCardActionArea>
 		</Card>

@@ -14,7 +14,7 @@ export default function SearchCombo() {
 
 	async function searchCourse() {
 		const resData = await fetch(
-			process.env.REACT_APP_SERVICE_API + "/api/course/search?name=" + sName + "&time=" + (sTime ? sTime : "")
+			process.env.REACT_APP_SERVICE_API + "/api/course/search?name=" + sName + "&time=" + (sTime ? sTime.toISOString() : "")
 		).then((res) => res.json());
 
 		dispatch(setCourseList(resData?.data || []));
