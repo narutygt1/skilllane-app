@@ -18,7 +18,6 @@ export default function Home() {
 	const [isLoading, setLoading] = useState<boolean>(true);
 	const [selectCat, setSelectCategory] = useState<string>("all");
 	const [courseGroup, setCourseGroup] = useState<ICourse[]>([]);
-	console.log(courseList);
 
 	useEffect(() => {
 		async function FetchData() {
@@ -60,7 +59,7 @@ export default function Home() {
 					<CategoryTabs value={selectCat} onChange={(v) => setSelectCategory(v)} />
 				</Box>
 				<Box>
-					{isLoading ? <CircularProgress sx={{ marginTop: 4 }} /> : <CourseList items={courseGroup} />}
+					{isLoading ? <CircularProgress sx={{ marginTop: 4 }} /> : <CourseList items={courseGroup} type="view" />}
 				</Box>
 			</Box>
 		</Box>

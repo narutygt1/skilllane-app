@@ -37,7 +37,7 @@ export default function ProfileMenu() {
 	};
 
 	const goToCourse = () => {
-		navigate("/course");
+		navigate("/admin/course");
 		handleClose();
 	};
 

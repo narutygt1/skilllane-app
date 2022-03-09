@@ -19,7 +19,7 @@ import { RootState } from "../redux/store";
 
 const data = [
 	{ icon: <PersonIcon />, label: "Profile", link: "/profile", role: ["student", "instructor"] },
-	{ icon: <SchoolIcon />, label: "Course", link: "/course", role: ["instructor"] },
+	{ icon: <SchoolIcon />, label: "Course", link: "/admin/course", role: ["instructor"] },
 ];
 
 const FireNav = styled(List)<{ component?: React.ElementType }>({

@@ -51,7 +51,7 @@ export default function CourseEdit() {
 							variant="outlined"
 							startIcon={<ArrowBackIcon />}
 							sx={{ color: "#00532a", borderColor: "#00532a !important" }}
-							onClick={() => navigate("/course")}>
+							onClick={() => navigate("/admin/course")}>
 							กลับ
 						</Button>
 					}>

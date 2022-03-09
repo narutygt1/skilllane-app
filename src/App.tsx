@@ -34,7 +34,7 @@ function App() {
 					<Route path="home" element={<Home />} />
 					<Route path="profile" element={<Profile />} />
 					<Route element={<ProtectedInstructorRoutes />}>
-						<Route path="course">
+						<Route path="admin/course">
 							<Route path="" element={<Course />} />
 							<Route path="create" element={<CreateCourse />} />
 							<Route path=":courseId" element={<CourseEdit />} />

@@ -40,14 +40,14 @@ export default function Course() {
 							variant="contained"
 							startIcon={<AddCircleIcon />}
 							sx={{ backgroundColor: "#00532a !important" }}
-							onClick={() => navigate("/course/create")}>
+							onClick={() => navigate("/admin/course/create")}>
 							สร้าง
 						</Button>
 					}>
 					{isLoading ? (
 						<CircularProgress sx={{ marginTop: 4 }} />
 					) : (
-						<CourseList items={courseList} lg={4} xl={3} />
+						<CourseList items={courseList} lg={4} xl={3} type="edit" />
 					)}
 				</AdminBox>
 			</Box>

@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -67,15 +68,16 @@ const PriceBox = styled(Box)(({ theme }) => ({
 
 interface CourseCardProps {
 	value: ICourse;
+	onClick?: MouseEventHandler<any>;
 }
 
-export default function CourseCard({ value }: CourseCardProps) {
+export default function CourseCard({ value, onClick }: CourseCardProps) {
 
 	const instructor: IUser | null =  value.instructor.length > 0 ? value.instructor[0] as any : null;
 	const instName = instructor ? `${instructor.firstname} ${instructor.lastname}` : "";
 
 	return (
-		<Card sx={{ height: "100%" }}>
+		<Card sx={{ height: "100%" }} onClick={onClick}>
 			<CustomCardActionArea>
 				<CardMedia component="img" image={value.image} alt="skilllane test" />
 				<CardContent>
