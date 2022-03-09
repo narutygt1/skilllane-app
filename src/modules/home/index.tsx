@@ -42,12 +42,18 @@ export default function Home() {
 	}, [courseList, selectCat]);
 
 	return (
-		<Box>
-			<CardMedia
-				component="img"
-				image="https://skilllane.s3-ap-southeast-1.amazonaws.com/tu/datascience/data_science_banner.jpg"
-				alt="skilllane test"
-			/>
+		<Box overflow="hidden">
+			<Box position="relative">
+				<CardMedia
+					component="img"
+					image="https://skilllane.s3-ap-southeast-1.amazonaws.com/tu/datascience/data_science_banner.jpg"
+					alt="skilllane test"
+					height={230}
+				/>
+				<Typography width="100%" position="absolute" top={76} variant="h3" color="#fff" fontSize={{ xs: 26, sm: 38 }} px={2}>
+					ยินดีต้อนรับสู่ หลักสูตรออนไลน์
+				</Typography>
+			</Box>
 			<Box mx="auto" maxWidth={1140} px={1}>
 				<Box position="relative" top={-28} mx="auto" maxWidth={980} mb={6}>
 					<SearchCombo />
@@ -59,7 +65,11 @@ export default function Home() {
 					<CategoryTabs value={selectCat} onChange={(v) => setSelectCategory(v)} />
 				</Box>
 				<Box>
-					{isLoading ? <CircularProgress sx={{ marginTop: 4 }} /> : <CourseList items={courseGroup} type="view" />}
+					{isLoading ? (
+						<CircularProgress sx={{ marginTop: 4 }} />
+					) : (
+						<CourseList items={courseGroup} type="view" />
+					)}
 				</Box>
 			</Box>
 		</Box>

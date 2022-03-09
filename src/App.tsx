@@ -7,6 +7,7 @@ import Profile from "./modules/profile";
 import Course from "./modules/course";
 import CreateCourse from "./modules/course/CreateCourse";
 import CourseEdit from "./modules/course/CourseEdit";
+import CourseDetails from "./components/CourseDetails";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
@@ -33,6 +34,10 @@ function App() {
 				<Route element={<ProtectedRoutes />}>
 					<Route path="home" element={<Home />} />
 					<Route path="profile" element={<Profile />} />
+					<Route path="course">
+						<Route path="" element={<Home />} />
+						<Route path=":courseId" element={<CourseDetails />} />
+					</Route>
 					<Route element={<ProtectedInstructorRoutes />}>
 						<Route path="admin/course">
 							<Route path="" element={<Course />} />
