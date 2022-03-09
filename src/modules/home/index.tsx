@@ -1,15 +1,46 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
+import { setCourseList } from "../../redux/slices/Course";
 import CourseList from "../../components/CourseList";
 import SearchCombo from "../../components/SearchCombo";
 import CategoryTabs from "../../components/CategoryTabs";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import { ICourse } from "../../types/Course";
 
 export default function Home() {
+	const dispatch = useDispatch();
+	const courseList = useSelector((state: RootState) => state.course.courseList);
+	const [isLoading, setLoading] = useState<boolean>(true);
+	const [selectCat, setSelectCategory] = useState<string>("all");
+	const [courseGroup, setCourseGroup] = useState<ICourse[]>([]);
+	console.log(courseList);
+
+	useEffect(() => {
+		async function FetchData() {
+			const resData = await fetch(process.env.REACT_APP_SERVICE_API + "/api/course/search").then((res) =>
+				res.json()
+			);
+
+			dispatch(setCourseList(resData?.data || []));
+			setLoading(false);
+		}
+
+		FetchData();
+	}, []);
+
+	useEffect(() => {
+		if (selectCat !== "all") {
+			const catFiller = courseList.filter((itm) => (itm.category as any).name === selectCat);
+			setCourseGroup(catFiller);
+		} else {
+			setCourseGroup(courseList);
+		}
+	}, [courseList, selectCat]);
 
 	return (
 		<Box>
@@ -26,10 +57,10 @@ export default function Home() {
 					<Typography variant="h1" component="div" fontSize={{ xs: 28, md: 36 }} color="#4e4e4e" mb={3}>
 						วิชาในหลักสูตร
 					</Typography>
-					<CategoryTabs onChange={(v) => console.log(v)} />
+					<CategoryTabs value={selectCat} onChange={(v) => setSelectCategory(v)} />
 				</Box>
 				<Box>
-					<CourseList items={[]} />
+					{isLoading ? <CircularProgress sx={{ marginTop: 4 }} /> : <CourseList items={courseGroup} />}
 				</Box>
 			</Box>
 		</Box>

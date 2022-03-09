@@ -15,12 +15,14 @@ import PersonIcon from "@mui/icons-material/Person";
 import Stack from "@mui/material/Stack";
 import Hidden from "@mui/material/Hidden";
 import { styled } from "@mui/material/styles";
+import { ICourse } from "../types/Course";
+import { IUser } from "../types/User";
 
 const CustomCardActionArea = styled(CardActionArea)(({ theme }) => ({
 	display: "flex",
 	flexDirection: "column",
 	"& .MuiCardContent-root": {
-		padding: 14,
+		padding: 10,
 	},
 	[theme.breakpoints.down("md")]: {
 		flexDirection: "row",
@@ -41,7 +43,6 @@ const TitleBox = styled(Box)(({ theme }) => ({
 	[theme.breakpoints.down("md")]: {
 		marginTop: 14,
 		"& .course-title": {
-            fontSize: 16,
 			overflow: "hidden",
 			textOverflow: "ellipsis",
 			whiteSpace: "nowrap",
@@ -64,15 +65,19 @@ const PriceBox = styled(Box)(({ theme }) => ({
 	alignItems: "flex-end",
 }));
 
-export default function CourseCard() {
+interface CourseCardProps {
+	value: ICourse;
+}
+
+export default function CourseCard({ value }: CourseCardProps) {
+
+	const instructor: IUser | null =  value.instructor.length > 0 ? value.instructor[0] as any : null;
+	const instName = instructor ? `${instructor.firstname} ${instructor.lastname}` : "";
+
 	return (
-		<Card>
+		<Card sx={{ height: "100%" }}>
 			<CustomCardActionArea>
-				<CardMedia
-					component="img"
-					image="https://d2evv1y2d8aswp.cloudfront.net/courses/highlight_imgs/000/001/689/large_webp/PYTHON_660x390_1646039564.webp"
-					alt="skilllane test"
-				/>
+				<CardMedia component="img" image={value.image} alt="skilllane test" />
 				<CardContent>
 					<TitleBox>
 						<Typography
@@ -80,11 +85,11 @@ export default function CourseCard() {
 							gutterBottom
 							variant="h2"
 							component="div"
-							fontSize={14}
+							fontSize={{ xs: 12 ,sm: 14}}
 							overflow="hidden"
 							color="#00532a"
 							textAlign="left">
-							Python for Data Science ไพธอนสำหรับงานวิทยาศาสตร์ข้อมูล
+							{value.name}
 						</Typography>
 					</TitleBox>
 
@@ -100,7 +105,7 @@ export default function CourseCard() {
 										</Avatar>
 									</ListItemAvatar>
 								</Hidden>
-								<ListItemText primary="ผศ. ดร.ศราวุธ แรมจันทร์" />
+								<ListItemText primary={instName} />
 							</ListItem>
 							<Hidden mdDown>
 								<ListItem disablePadding sx={{ "& *": { fontSize: 14 } }}>

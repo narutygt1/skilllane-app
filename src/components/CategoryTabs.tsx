@@ -11,21 +11,22 @@ function a11yProps(keyName: string) {
 }
 
 interface CategoryTabsProps {
+	value?: string;
 	onChange?: (value: string) => void;
 }
 
-export default function CategoryTabs({ onChange }: CategoryTabsProps) {
-	const [value, setValue] = useState<string>("all");
+export default function CategoryTabs({ value, onChange }: CategoryTabsProps) {
+	const [localValue, setLocalValue] = useState<string>(value || "all");
 
 	const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-		setValue(newValue);
+		setLocalValue(newValue);
 		onChange && onChange(newValue);
 	};
 
 	return (
 		<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
 			<Tabs
-				value={value}
+				value={localValue}
 				onChange={handleChange}
 				aria-label="category tabs"
 				sx={{ "& .MuiTabs-flexContainer": { justifyContent: "center" } }}>

@@ -11,7 +11,7 @@ interface SearchBoxProps {
 
 export default function SearchBox({ onChange, fullWidth = false }: SearchBoxProps) {
 	const [localValue, setLocalValue] = useState<string>("");
-	const debouncedValue = useDebounce(localValue, 500);
+	const debouncedValue = useDebounce(localValue, 200);
 
 	useEffect(() => {
 		onChange && onChange(localValue);

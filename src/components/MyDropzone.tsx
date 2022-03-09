@@ -36,6 +36,11 @@ export default function MyDropzone({ name }: MyDropzoneProps) {
 	));
 
 	useEffect(() => {
+		if (!initFilename) {
+			setInitFile([]);
+			return;
+		}
+
 		const toDataURL = (url: string) =>
 			fetch(url)
 				.then((response) => response.blob())
