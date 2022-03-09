@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import AppBar from "@mui/material/AppBar";
+import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -54,7 +55,26 @@ export default function AppLayout({ children }: AppLayoutProps) {
 					</Box>
 				</Toolbar>
 			</AppBar>
-			<Box>{children}</Box>
+			<Box pb={3}>{children}</Box>
+			<Divider />
+			<Box maxWidth={1140} mx="auto" pt={2} pb={4} px={2}>
+				<Box display="flex" flexDirection={{ xs: "column", sm: "row" }} justifyContent="space-between">
+					<Box>
+						<Box height={55} sx={{ "& img": { objectFit: "contain", height: "100%" } }}>
+							<img src="https://d2evv1y2d8aswp.cloudfront.net/images/Logo/logo.png" alt="skilllane test" />
+						</Box>
+						<Typography fontSize={13}>สถาบันออนไลน์ สำหรับคนที่ต้องการความก้าวหน้า</Typography>
+						<Typography fontSize={13}>สอนโดยผู้เชี่ยวชาญ จากประสบการณ์จริง</Typography>
+						<Typography fontSize={13}>© 2022 SkillLane.com All rights reserved.</Typography>
+					</Box>
+					<Box mt={2}>
+						<Typography fontSize={18} fontWeight={700}>
+							ผู้ทำข้อสอบ
+						</Typography>
+						<Typography fontSize={16}>นรุตม์ รุ่งทองใบสุรีย์</Typography>
+					</Box>
+				</Box>
+			</Box>
 		</Box>
 	);
 }
