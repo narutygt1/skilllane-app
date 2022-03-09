@@ -72,6 +72,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 							ผู้ทำข้อสอบ
 						</Typography>
 						<Typography fontSize={16}>นรุตม์ รุ่งทองใบสุรีย์</Typography>
+						<Typography fontSize={16}>ตำแหน่ง Software Engineer</Typography>
 					</Box>
 				</Box>
 			</Box>
