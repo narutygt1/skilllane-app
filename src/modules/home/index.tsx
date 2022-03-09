@@ -47,10 +47,17 @@ export default function Home() {
 				<CardMedia
 					component="img"
 					image="https://skilllane.s3-ap-southeast-1.amazonaws.com/tu/datascience/data_science_banner.jpg"
-					alt="skilllane test"
+					alt=""
 					height={230}
 				/>
-				<Typography width="100%" position="absolute" top={76} variant="h3" color="#fff" fontSize={{ xs: 26, sm: 38 }} px={2}>
+				<Typography
+					width="100%"
+					position="absolute"
+					top={76}
+					variant="h3"
+					color="#fff"
+					fontSize={{ xs: 26, sm: 38 }}
+					px={2}>
 					ยินดีต้อนรับสู่ หลักสูตรออนไลน์
 				</Typography>
 			</Box>

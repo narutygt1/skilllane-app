@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DeleteIcon from "@mui/icons-material/Delete";
 import FormEdit from "./FormEdit";
 import { ICategory } from "../../types/Category";
 import { ICourse } from "../../types/Course";
@@ -20,6 +21,21 @@ export default function CourseEdit() {
 	const [course, setCourse] = useState<ICourse | null>(null);
 	const [cats, setCategories] = useState<ICategory[]>([]);
 	const [isLoading, setLoading] = useState<boolean>(true);
+
+	async function handlerDelete(id: string) {
+		const response = await fetch(process.env.REACT_APP_SERVICE_API + "/api/course/delete_item", {
+			method: "POST",
+			body: JSON.stringify({
+				id,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (response.status === 200) {
+			navigate("/admin/course");
+		}
+	}
 
 	useEffect(() => {
 		if (!courseId) return;
@@ -53,6 +69,16 @@ export default function CourseEdit() {
 							sx={{ color: "#00532a", borderColor: "#00532a !important" }}
 							onClick={() => navigate("/admin/course")}>
 							กลับ
+						</Button>
+					}
+					endComponent={
+						<Button
+							variant="contained"
+							startIcon={<DeleteIcon />}
+							sx={{ backgroundColor: "#e53935 !important" }}
+							disabled={!course}
+							onClick={() => handlerDelete((course as any)._id)}>
+							ลบ
 						</Button>
 					}>
 					{isLoading ? (
