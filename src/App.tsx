@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import ProtectedLoggedInRoutes from "./core/ProtectedLoggedInRoutes";
 import ProtectedRoutes from "./core/ProtectedRoutes";
+import ProtectedInstructorRoutes from "./core/ProtectedInstructorRoutes";
 
 function App() {
 	const myUser = useSelector((state: RootState) => state.user.myUser);
@@ -32,10 +33,12 @@ function App() {
 				<Route element={<ProtectedRoutes />}>
 					<Route path="home" element={<Home />} />
 					<Route path="profile" element={<Profile />} />
-					<Route path="course">
-						<Route path="" element={<Course />} />
-						<Route path="create" element={<CreateCourse />} />
-						<Route path=":courseId" element={<CourseEdit />} />
+					<Route element={<ProtectedInstructorRoutes />}>
+						<Route path="course">
+							<Route path="" element={<Course />} />
+							<Route path="create" element={<CreateCourse />} />
+							<Route path=":courseId" element={<CourseEdit />} />
+						</Route>
 					</Route>
 				</Route>
 			</Routes>

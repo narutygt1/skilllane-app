@@ -9,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Hidden from "@mui/material/Hidden";
 import { Link, useNavigate } from "react-router-dom";
-import SearchBox from "../components/SearchBox";
 import ProfileMenu from "../components/ProfileMenu";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -37,11 +36,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
 								<img src="https://resource.skilllane.com/images/Logo/logo.png" alt="skilllane-test" />
 							</Link>
 						</Box>
-						{myUser && (
-							<Box ml={2}>
-								<SearchBox onChange={(v) => console.log(v)} />
-							</Box>
-						)}
 						<Hidden smDown>
 							<Box ml="auto" my="auto">
 								<Box>

@@ -14,10 +14,12 @@ import SchoolIcon from "@mui/icons-material/School";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { setMyUser } from "../redux/slices/User";
 import { setAuthToken } from "../lib/auth";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const data = [
-	{ icon: <PersonIcon />, label: "Profile", link: "/profile" },
-	{ icon: <SchoolIcon />, label: "Course", link: "/course" },
+	{ icon: <PersonIcon />, label: "Profile", link: "/profile", role: ["student", "instructor"] },
+	{ icon: <SchoolIcon />, label: "Course", link: "/course", role: ["instructor"] },
 ];
 
 const FireNav = styled(List)<{ component?: React.ElementType }>({
@@ -37,6 +39,7 @@ const FireNav = styled(List)<{ component?: React.ElementType }>({
 export default function CustomizedList() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const myUser = useSelector((state: RootState) => state.user.myUser);
 
 	const signOut = () => {
 		dispatch(setMyUser(null));
@@ -60,7 +63,7 @@ export default function CustomizedList() {
 						background: { paper: "rgb(5, 30, 52)" },
 					},
 				})}>
-				<Paper elevation={0} sx={{ width: "100%", maxWidth: 275 }}>
+				<Paper elevation={0} sx={{ width: "100%", maxWidth: { xs: "100%", sm: 275 } }}>
 					<FireNav component="nav">
 						<ListItemButton component="a" href="#customized-list">
 							<ListItemText
@@ -75,18 +78,21 @@ export default function CustomizedList() {
 						</ListItemButton>
 						<Divider />
 						<Box pt={2} pb={10}>
-							{data.map((item) => (
-								<ListItemButton
-									key={item.label}
-									sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
-									onClick={() => navigate(item.link)}>
-									<ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
-									<ListItemText
-										primary={item.label}
-										primaryTypographyProps={{ fontSize: 14, fontWeight: "medium" }}
-									/>
-								</ListItemButton>
-							))}
+							{data.map(
+								(item) =>
+									item.role.some((ir) => ir === myUser?.role) && (
+										<ListItemButton
+											key={item.label}
+											sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
+											onClick={() => navigate(item.link)}>
+											<ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
+											<ListItemText
+												primary={item.label}
+												primaryTypographyProps={{ fontSize: 14, fontWeight: "medium" }}
+											/>
+										</ListItemButton>
+									)
+							)}
 							<ListItemButton sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }} onClick={signOut}>
 								<ListItemIcon sx={{ color: "inherit" }}>
 									<LogoutIcon />
