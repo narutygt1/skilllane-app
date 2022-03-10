@@ -33,7 +33,7 @@ export default function AdminBox({ title, startComponent, endComponent, children
 				)}
 			</Box>
 			<Divider />
-			<Box pb={6}>{children}</Box>
+			<Box pb={6} px={1}>{children}</Box>
 		</Box>
 	);
 }
