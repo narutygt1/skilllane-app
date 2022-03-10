@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import AdminBox from "../../components/AdminBox";
+import NotFound from "../../components/NotFound";
 import { useNavigate } from "react-router-dom";
 import UserLayout from "../../core/UserLayout";
 import Box from "@mui/material/Box";
@@ -46,8 +47,10 @@ export default function Course() {
 					}>
 					{isLoading ? (
 						<CircularProgress sx={{ marginTop: 4 }} />
-					) : (
+					) : courseList.length > 0 ? (
 						<CourseList items={courseList} lg={4} xl={3} type="edit" />
+					) : (
+						<NotFound />
 					)}
 				</AdminBox>
 			</Box>
